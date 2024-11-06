@@ -1,6 +1,7 @@
 package com.amit.product.product.service;
 
 import com.amit.product.product.entity.Product;
+import com.amit.product.product.enums.ErrorMessgaeEnum;
 import com.amit.product.product.exception.ResourceNotFoundException;
 import com.amit.product.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product getProductById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(ErrorMessgaeEnum.PRODUCT_NOT_FOUND));
     }
 
     @Override
