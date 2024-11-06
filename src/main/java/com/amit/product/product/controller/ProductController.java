@@ -2,6 +2,7 @@ package com.amit.product.product.controller;
 
 
 import com.amit.product.product.dto.JsonResponse;
+import com.amit.product.product.dto.ProductDTO;
 import com.amit.product.product.entity.Product;
 import com.amit.product.product.service.ProductService;
 import jakarta.validation.Valid;
@@ -37,16 +38,16 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<JsonResponse<Product>> createProduct(@Valid @RequestBody Product product) {
+    public ResponseEntity<JsonResponse<Product>> createProduct(@Valid @RequestBody ProductDTO product) {
         Product createdProduct = productService.createProduct(product);
         JsonResponse<Product> response = new JsonResponse<>(createdProduct, "Product created successfully", true, HttpStatus.CREATED.value());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<JsonResponse<Product>> updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
+    public ResponseEntity<JsonResponse<Product>> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDTO product) {
         Product updatedProduct = productService.updateProduct(id, product);
-        JsonResponse<Product> response = new JsonResponse<>(product, "Product updated successfully",true,  HttpStatus.OK.value());
+        JsonResponse<Product> response = new JsonResponse<>(updatedProduct, "Product updated successfully",true,  HttpStatus.OK.value());
         return ResponseEntity.ok(response);
     }
 

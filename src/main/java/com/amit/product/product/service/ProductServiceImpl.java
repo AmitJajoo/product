@@ -1,5 +1,6 @@
 package com.amit.product.product.service;
 
+import com.amit.product.product.dto.ProductDTO;
 import com.amit.product.product.entity.Product;
 import com.amit.product.product.enums.ErrorMessgaeEnum;
 import com.amit.product.product.exception.ResourceNotFoundException;
@@ -29,12 +30,16 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product createProduct(Product product) {
+    public Product createProduct(ProductDTO productDTO) {
+        Product product = new Product();
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
         return productRepository.save(product);
     }
 
     @Override
-    public Product updateProduct(Long id, Product product) {
+    public Product updateProduct(Long id, ProductDTO product) {
         Product existingProduct = getProductById(id);
         existingProduct.setName(product.getName());
         existingProduct.setDescription(product.getDescription());
